@@ -12,7 +12,6 @@ public class Main {
         VendingMachine vm = new VendingMachine();
         Scanner scanner = new Scanner(System.in);
 
-        // Початкове заповнення (Зверни увагу, я ставлю 35 води, але завдяки ліміту зайде тільки 30)
         vm.addProduct(new Drink("Coca-Cola", 25.00, 0.5), 5);
         vm.addProduct(new Drink("Water", 15.00, 0.5), 35);
         vm.addProduct(new Snack("Chips Lay's", 40.00, true), 3);
@@ -63,7 +62,7 @@ public class Main {
                     break;
 
                 case "0":
-                    // Вимога №2: Попередження про решту
+
                     if (vm.getBalance() > 0) {
                         System.out.println("⚠  УВАГА! Ви не забрали решту (" + vm.getBalance() + " грн)!");
                         System.out.println("Спочатку оберіть пункт '3', щоб забрати гроші.");
@@ -99,7 +98,6 @@ public class Main {
             return;
         }
 
-        // Вимога №3: Скільки одиниць купити?
         System.out.print("Скільки штук ви хочете купити? ");
         int quantityToBuy;
         try {
@@ -114,13 +112,11 @@ public class Main {
             return;
         }
 
-        // Перевірка наявності потрібної кількості
         if (quantityToBuy > slot.getQuantity()) {
             System.out.println("Помилка: В автоматі є лише " + slot.getQuantity() + " шт.");
             return;
         }
 
-        // Перевірка, чи вистачить грошей на ВСЮ партію
         double totalCost = slot.getProduct().getPrice() * quantityToBuy;
         if (vm.getBalance() < totalCost) {
             System.out.printf("Помилка: Недостатньо коштів. Ціна за %d шт: %.2f грн. Ваш баланс: %.2f грн\n",
@@ -128,8 +124,6 @@ public class Main {
             return;
         }
 
-        // --- ЦИКЛ ПОКУПКИ ---
-        // Ми купуємо товар по одному, щоб для кожного спрацювала ймовірність застрягання
         System.out.println("\n--- Починаємо видачу " + quantityToBuy + " товарів ---");
 
         for (int i = 1; i <= quantityToBuy; i++) {
@@ -139,14 +133,11 @@ public class Main {
         System.out.println("\n--- Операцію завершено ---");
     }
 
-    // Допоміжний метод для обробки видачі ОДНОГО товару (з логікою застрягання)
     private static void processSingleItemLogic(VendingMachine vm, ProductSlot slot, Scanner scanner) {
         Product product = slot.getProduct();
 
-        // Списуємо гроші
         vm.processPayment(slot);
-
-        // Перевірка на застрягання
+        
         if (vm.isStuck()) {
             System.out.println("ОЙ! Цей товар застряг!");
             System.out.println("1. Вдарити автомат (Шанс 50%)");

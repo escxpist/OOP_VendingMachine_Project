@@ -18,7 +18,6 @@ public class VendingMachine {
         this.balance = 0.0;
     }
 
-    // Оновлений метод додавання (перевірка ліміту вже всередині слота, але тут ми просто передаємо дані)
     public void addProduct(Product product, int quantity) {
         if (quantity > ProductSlot.MAX_CAPACITY) {
             quantity = ProductSlot.MAX_CAPACITY; // Обрізаємо зайве
@@ -91,7 +90,7 @@ public class VendingMachine {
     public void refillSlot(int index, int amount) {
         ProductSlot slot = getSlot(index);
         if (slot != null) {
-            // Вся логіка перевірки ліміту тепер всередині slot.addQuantity
+
             slot.addQuantity(amount);
             System.out.println("Операцію виконано. Поточна кількість: " + slot.getQuantity());
         }

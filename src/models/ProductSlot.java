@@ -4,12 +4,10 @@ public class ProductSlot {
     private Product product;
     private int quantity;
 
-    // Вимога №1: Ліміт 30 штук
     public static final int MAX_CAPACITY = 30;
 
     public ProductSlot(Product product, int quantity) {
         this.product = product;
-        // При створенні обрізаємо, якщо передали більше 30
         this.quantity = Math.min(quantity, MAX_CAPACITY);
     }
 
@@ -27,7 +25,6 @@ public class ProductSlot {
         }
     }
 
-    // Оновлений метод поповнення з врахуванням ліміту
     public void addQuantity(int amount) {
         if (quantity + amount > MAX_CAPACITY) {
             System.out.println("⚠ Увага: Не можна покласти більше " + MAX_CAPACITY + " шт. Слот заповнено до максимуму.");

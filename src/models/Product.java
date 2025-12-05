@@ -1,6 +1,6 @@
 package models;
 
-// Абстрактний клас "Товар"
+
 public abstract class Product {
     private String name;
     private double price;
@@ -18,7 +18,7 @@ public abstract class Product {
         return price;
     }
 
-    // Абстрактний метод: кожен товар споживається по-своєму
+
     public abstract String consume();
 
     @Override
